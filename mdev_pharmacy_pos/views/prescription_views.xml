@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="prescription_form" model="ir.ui.view">
+        <field name="name">pharmacy.prescription.form</field>
+        <field name="model">pharmacy.prescription</field>
+        <field name="arch" type="xml">
+            <form string="وصفة طبية">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,dispensed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="بيانات المريض">
+                            <field name="patient_name"/>
+                            <field name="patient_id_number"/>
+                            <field name="patient_phone"/>
+                            <field name="patient_age"/>
+                            <field name="partner_id"/>
+                        </group>
+                        <group string="بيانات الطبيب">
+                            <field name="doctor_name"/>
+                            <field name="doctor_license"/>
+                            <field name="clinic_name"/>
+                            <field name="prescription_date"/>
+                            <field name="prescription_type"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="الأصناف">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                    <field name="dosage"/>
+                                    <field name="duration"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="ملاحظات">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="prescription_tree" model="ir.ui.view">
+        <field name="name">pharmacy.prescription.tree</field>
+        <field name="model">pharmacy.prescription</field>
+        <field name="arch" type="xml">
+            <list string="الوصفات الطبية">
+                <field name="name"/>
+                <field name="patient_name"/>
+                <field name="doctor_name"/>
+                <field name="prescription_date"/>
+                <field name="prescription_type"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_prescription" model="ir.actions.act_window">
+        <field name="name">الوصفات الطبية</field>
+        <field name="res_model">pharmacy.prescription</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="loyalty_config_form" model="ir.ui.view">
+        <field name="name">pharmacy.loyalty.config.form</field>
+        <field name="model">pharmacy.loyalty.config</field>
+        <field name="arch" type="xml">
+            <form string="برنامج النقاط">
+                <sheet>
+                    <div class="oe_title"><h1><field name="name"/></h1></div>
+                    <group>
+                        <group string="الكسب">
+                            <field name="earn_points_per_currency"/>
+                            <field name="exclude_controlled"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="الاستبدال">
+                            <field name="redeem_value_per_point"/>
+                            <field name="min_redeem_points"/>
+                            <field name="max_redeem_percent"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="loyalty_config_tree" model="ir.ui.view">
+        <field name="name">pharmacy.loyalty.config.tree</field>
+        <field name="model">pharmacy.loyalty.config</field>
+        <field name="arch" type="xml">
+            <list string="برامج النقاط">
+                <field name="name"/>
+                <field name="earn_points_per_currency"/>
+                <field name="redeem_value_per_point"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_loyalty_config" model="ir.actions.act_window">
+        <field name="name">برنامج النقاط</field>
+        <field name="res_model">pharmacy.loyalty.config</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- رصيد نقاط العميل في بطاقة الشريك -->
+    <record id="partner_form_loyalty" model="ir.ui.view">
+        <field name="name">res.partner.form.loyalty</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="النقاط">
+                    <group>
+                        <field name="loyalty_points" readonly="1"/>
+                        <field name="loyalty_total_earned" readonly="1"/>
+                        <field name="loyalty_total_spent" readonly="1"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

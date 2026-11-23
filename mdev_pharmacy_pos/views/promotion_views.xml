@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="promotion_form" model="ir.ui.view">
+        <field name="name">pharmacy.promotion.form</field>
+        <field name="model">pharmacy.promotion</field>
+        <field name="arch" type="xml">
+            <form string="عرض ترويجي">
+                <sheet>
+                    <div class="oe_title"><h1><field name="name"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="promo_type"/>
+                            <field name="discount_percent"/>
+                            <field name="min_qty" invisible="promo_type != 'qty_discount'"/>
+                        </group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="active"/>
+                            <field name="sequence"/>
+                        </group>
+                    </group>
+                    <group string="المنتجات" invisible="promo_type == 'category_percent'">
+                        <field name="product_ids" nolabel="1" widget="many2many_tags"/>
+                    </group>
+                    <group string="الفئات" invisible="promo_type != 'category_percent'">
+                        <field name="categ_ids" nolabel="1" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="promotion_tree" model="ir.ui.view">
+        <field name="name">pharmacy.promotion.tree</field>
+        <field name="model">pharmacy.promotion</field>
+        <field name="arch" type="xml">
+            <list string="العروض الترويجية">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="promo_type"/>
+                <field name="discount_percent"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_promotion" model="ir.actions.act_window">
+        <field name="name">العروض الترويجية</field>
+        <field name="res_model">pharmacy.promotion</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- إضافة حقول الصلاحية إلى نموذج الدفعة الأساسي (الوراثة تعمل) -->
+    <record id="stock_lot_form_pharmacy" model="ir.ui.view">
+        <field name="name">stock.lot.form.pharmacy</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form"/>
+        <field name="arch" type="xml">
+            <field name="ref" position="after">
+                <field name="pharma_manufacture_date"/>
+                <field name="pharma_expiry_date"/>
+                <field name="days_remaining" readonly="1"/>
+                <field name="expiry_status" readonly="1"/>
+                <field name="dtts_serial"/>
+                <field name="dtts_state"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- عرض شجرة مستقل للصلاحية (يتجنّب التعارض مع عرض الدفعات الأساسي) -->
+    <record id="stock_lot_tree_pharmacy" model="ir.ui.view">
+        <field name="name">stock.lot.tree.pharmacy</field>
+        <field name="model">stock.lot</field>
+        <field name="arch" type="xml">
+            <list string="صلاحية الدفعات"
+                  decoration-danger="expiry_status == 'expired'"
+                  decoration-warning="expiry_status == 'warning'"
+                  decoration-success="expiry_status == 'valid'">
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="pharma_manufacture_date"/>
+                <field name="pharma_expiry_date"/>
+                <field name="days_remaining"/>
+                <field name="expiry_status"/>
+                <field name="dtts_serial"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- بحث مستقل -->
+    <record id="stock_lot_search_pharmacy" model="ir.ui.view">
+        <field name="name">stock.lot.search.pharmacy</field>
+        <field name="model">stock.lot</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="product_id"/>
+                <filter name="expired" string="منتهية" domain="[('expiry_status', '=', 'expired')]"/>
+                <filter name="expiring" string="قاربت الانتهاء" domain="[('expiry_status', '=', 'warning')]"/>
+                <group expand="0" string="تجميع">
+                    <filter name="group_product" string="المنتج" context="{'group_by': 'product_id'}"/>
+                    <filter name="group_status" string="الحالة" context="{'group_by': 'expiry_status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_lot_expiry" model="ir.actions.act_window">
+        <field name="name">صلاحية الدفعات</field>
+        <field name="res_model">stock.lot</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="stock_lot_tree_pharmacy"/>
+        <field name="search_view_id" ref="stock_lot_search_pharmacy"/>
+        <field name="domain">[('pharma_expiry_date', '!=', False)]</field>
+    </record>
+</odoo>

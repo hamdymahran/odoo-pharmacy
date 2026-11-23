@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="mdev_pharmacy_pos.PrescriptionDialog">
+        <Dialog title="props.title || 'وصفة طبية'" contentClass="'popup-pharmacy-prescription'">
+            <div class="body">الدواء: <b class="pharmacy-product"><t t-esc="props.productName"/></b></div>
+            <div class="pharmacy-rx-form">
+                <table>
+                    <tr>
+                        <td>اسم المريض *</td>
+                        <td><input class="rx-patient-name form-control" type="text" placeholder="إلزامي"
+                                   t-model="state.patient_name" t-att-style="state.error ? 'border-color:red' : ''"/></td>
+                    </tr>
+                    <tr><td>رقم الهوية</td><td><input class="rx-patient-id form-control" type="text" t-model="state.patient_id_number"/></td></tr>
+                    <tr><td>جوال المريض</td><td><input class="rx-patient-phone form-control" type="text" t-model="state.patient_phone"/></td></tr>
+                    <tr><td>اسم الطبيب</td><td><input class="rx-doctor form-control" type="text" t-model="state.doctor_name"/></td></tr>
+                    <tr><td>ترخيص الطبيب</td><td><input class="rx-doctor-license form-control" type="text" t-model="state.doctor_license"/></td></tr>
+                    <tr>
+                        <td>نوع الوصفة</td>
+                        <td>
+                            <select class="rx-type form-select" t-model="state.prescription_type">
+                                <t t-foreach="types" t-as="type" t-key="type[0]">
+                                    <option t-att-value="type[0]"><t t-esc="type[1]"/></option>
+                                </t>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary btn-lg confirm" t-on-click="confirm">تأكيد</button>
+                <button class="btn btn-secondary btn-lg cancel" t-on-click="() => this.props.close()">إلغاء</button>
+            </t>
+        </Dialog>
+    </t>
+
+    <t t-name="mdev_pharmacy_pos.OrdersDialog">
+        <Dialog title="props.title || 'الفواتير السابقة'" contentClass="'popup-pharmacy-orders'">
+            <div class="pharmacy-orders-body">
+                <input class="order-search form-control d-inline-block" type="text" placeholder="بحث برقم الفاتورة" t-model="state.search"/>
+                <button class="btn btn-primary search-btn" t-on-click="() => this.load()">بحث</button>
+                <div class="pharmacy-orders-scroll">
+                    <table class="pharmacy-orders-table">
+                        <thead>
+                            <tr><th>الفاتورة</th><th>العميل</th><th>الإجمالي</th><th>التاريخ</th></tr>
+                        </thead>
+                        <tbody class="orders-list">
+                            <t t-foreach="state.orders" t-as="o" t-key="o.id">
+                                <tr class="order-row" t-on-click="() => this.select(o.id)">
+                                    <td><t t-esc="o.name"/></td>
+                                    <td><t t-esc="o.partner || '-'"/></td>
+                                    <td><t t-esc="money(o.amount_total)"/></td>
+                                    <td><t t-esc="o.date_order"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-secondary btn-lg cancel" t-on-click="() => this.props.close()">إغلاق</button>
+            </t>
+        </Dialog>
+    </t>
+
+    <t t-name="mdev_pharmacy_pos.PrintDialog">
+        <Dialog title="props.title || 'طباعة'" contentClass="'popup-pharmacy-print'">
+            <div class="print-content"><t t-out="html"/></div>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary btn-lg print-btn" t-on-click="print">طباعة</button>
+                <button class="btn btn-secondary btn-lg cancel" t-on-click="() => this.props.close()">إغلاق</button>
+            </t>
+        </Dialog>
+    </t>
+
+    <!-- أزرار الصيدلية داخل قائمة "المزيد" في شاشة البيع -->
+    <t t-name="mdev_pharmacy_pos.ControlButtons" t-inherit="point_of_sale.ControlButtons" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('control-buttons-modal')]" position="inside">
+            <t t-if="pharmacyOn">
+                <button class="control-button btn btn-secondary btn-lg py-5 pharmacy-btn" t-on-click="() => this.pharmacyReturn()">
+                    <i class="fa fa-undo me-1"/> مرتجع
+                </button>
+                <button class="control-button btn btn-secondary btn-lg py-5 pharmacy-btn" t-on-click="() => this.pharmacyReprint()">
+                    <i class="fa fa-print me-1"/> فواتير سابقة
+                </button>
+                <button class="control-button btn btn-secondary btn-lg py-5 pharmacy-btn" t-on-click="() => this.pharmacyZReport()">
+                    <i class="fa fa-file-text-o me-1"/> تقرير Z
+                </button>
+                <button t-if="pharmacyLoyaltyOn" class="control-button btn btn-secondary btn-lg py-5 pharmacy-btn" t-on-click="() => this.pharmacyRedeem()">
+                    <i class="fa fa-gift me-1"/> استبدال نقاط
+                </button>
+            </t>
+        </xpath>
+    </t>
+
+</templates>

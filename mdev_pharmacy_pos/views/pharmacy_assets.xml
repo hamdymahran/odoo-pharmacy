@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- تحميل أصول واجهة نقطة البيع (أودو 13) -->
+    <template id="pharmacy_pos_assets" inherit_id="point_of_sale.assets">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/mdev_pharmacy_pos/static/src/css/pharmacy_pos.css"/>
+            <script type="text/javascript" src="/mdev_pharmacy_pos/static/src/js/pharmacy_models.js"/>
+            <script type="text/javascript" src="/mdev_pharmacy_pos/static/src/js/pharmacy_pos.js"/>
+            <script type="text/javascript" src="/mdev_pharmacy_pos/static/src/js/pharmacy_loyalty.js"/>
+            <script type="text/javascript" src="/mdev_pharmacy_pos/static/src/js/pharmacy_promotions.js"/>
+            <script type="text/javascript" src="/mdev_pharmacy_pos/static/src/js/pharmacy_sales_ops.js"/>
+        </xpath>
+    </template>
+</odoo>

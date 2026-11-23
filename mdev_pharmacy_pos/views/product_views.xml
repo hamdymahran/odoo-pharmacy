@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_form_pharmacy" model="ir.ui.view">
+        <field name="name">product.template.form.pharmacy</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <!-- علم المنتج الدوائي (مرئي) -->
+            <field name="type" position="after">
+                <field name="is_pharmaceutical"/>
+            </field>
+            <!-- تبويب بيانات الصيدلية -->
+            <notebook position="inside">
+                <page string="بيانات الصيدلية">
+                    <group>
+                        <group string="بيانات الدواء">
+                            <field name="pharma_scientific_name"/>
+                            <field name="pharma_strength"/>
+                            <field name="pharma_form"/>
+                            <field name="pharma_manufacturer"/>
+                            <field name="pharma_country_id"/>
+                        </group>
+                        <group string="التصنيف التنظيمي">
+                            <field name="requires_prescription"/>
+                            <field name="is_controlled"/>
+                            <field name="controlled_category" invisible="not is_controlled" required="is_controlled"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="SFDA">
+                            <field name="sfda_registration_no"/>
+                            <field name="sfda_registration_expiry"/>
+                        </group>
+                        <group string="رصد / GS1">
+                            <field name="gtin"/>
+                            <field name="dtts_registered"/>
+                            <field name="track_serial_dtts"/>
+                        </group>
+                    </group>
+                    <group string="البدائل الدوائية">
+                        <field name="pharma_substitute_ids" nolabel="1" widget="many2many_tags"/>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

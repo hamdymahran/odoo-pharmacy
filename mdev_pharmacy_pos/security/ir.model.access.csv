@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_prescription_user,pharmacy.prescription.user,model_pharmacy_prescription,group_pharmacy_user,1,1,1,0
+access_prescription_manager,pharmacy.prescription.manager,model_pharmacy_prescription,group_pharmacy_manager,1,1,1,1
+access_prescription_line_user,pharmacy.prescription.line.user,model_pharmacy_prescription_line,group_pharmacy_user,1,1,1,1
+access_controlled_log_user,pharmacy.controlled.log.user,model_pharmacy_controlled_log,group_pharmacy_user,1,0,1,0
+access_controlled_log_manager,pharmacy.controlled.log.manager,model_pharmacy_controlled_log,group_pharmacy_manager,1,1,1,1
+access_dtts_config,dtts.config,model_dtts_config,group_pharmacy_manager,1,1,1,1
+access_dtts_transaction_user,dtts.transaction.user,model_dtts_transaction,group_pharmacy_user,1,0,0,0
+access_dtts_transaction_manager,dtts.transaction.manager,model_dtts_transaction,group_pharmacy_manager,1,1,1,1
+access_loyalty_config_user,pharmacy.loyalty.config.user,model_pharmacy_loyalty_config,group_pharmacy_user,1,0,0,0
+access_loyalty_config_manager,pharmacy.loyalty.config.manager,model_pharmacy_loyalty_config,group_pharmacy_manager,1,1,1,1
+access_promotion_user,pharmacy.promotion.user,model_pharmacy_promotion,group_pharmacy_user,1,0,0,0
+access_promotion_manager,pharmacy.promotion.manager,model_pharmacy_promotion,group_pharmacy_manager,1,1,1,1
+access_loyalty_config_pos,pharmacy.loyalty.config.pos,model_pharmacy_loyalty_config,point_of_sale.group_pos_user,1,0,0,0
+access_promotion_pos,pharmacy.promotion.pos,model_pharmacy_promotion,point_of_sale.group_pos_user,1,0,0,0
+access_stock_lot_pos_pharmacy,stock.lot pos pharmacy,stock.model_stock_lot,point_of_sale.group_pos_user,1,0,0,0

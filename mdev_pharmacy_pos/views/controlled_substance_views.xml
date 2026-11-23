@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="controlled_log_tree" model="ir.ui.view">
+        <field name="name">pharmacy.controlled.log.tree</field>
+        <field name="model">pharmacy.controlled.log</field>
+        <field name="arch" type="xml">
+            <list string="سجل المواد المخدّرة" create="false">
+                <field name="name"/>
+                <field name="dispense_date"/>
+                <field name="product_id"/>
+                <field name="controlled_category"/>
+                <field name="quantity"/>
+                <field name="patient_name"/>
+                <field name="prescription_id"/>
+                <field name="pharmacist_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="controlled_log_form" model="ir.ui.view">
+        <field name="name">pharmacy.controlled.log.form</field>
+        <field name="model">pharmacy.controlled.log</field>
+        <field name="arch" type="xml">
+            <form string="قيد مادة مخدّرة">
+                <sheet>
+                    <div class="oe_title"><h1><field name="name" readonly="1"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="dispense_date"/>
+                            <field name="product_id"/>
+                            <field name="controlled_category"/>
+                            <field name="quantity"/>
+                            <field name="lot_id"/>
+                        </group>
+                        <group>
+                            <field name="patient_name"/>
+                            <field name="patient_id_number"/>
+                            <field name="doctor_name"/>
+                            <field name="prescription_id"/>
+                            <field name="pharmacist_id"/>
+                            <field name="pos_order_id"/>
+                        </group>
+                    </group>
+                    <field name="notes"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_controlled_log" model="ir.actions.act_window">
+        <field name="name">سجل المواد المخدّرة</field>
+        <field name="res_model">pharmacy.controlled.log</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

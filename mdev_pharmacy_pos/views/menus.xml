@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_pharmacy_root" name="الصيدلية"
+              web_icon="mdev_pharmacy_pos,static/description/icon.png"
+              groups="group_pharmacy_user" sequence="50"/>
+
+    <menuitem id="menu_pharmacy_prescription" name="الوصفات الطبية"
+              parent="menu_pharmacy_root" action="action_prescription" sequence="10"/>
+
+    <menuitem id="menu_pharmacy_controlled" name="سجل المخدّرات"
+              parent="menu_pharmacy_root" action="action_controlled_log"
+              groups="group_pharmacy_manager" sequence="20"/>
+
+    <menuitem id="menu_pharmacy_lot_expiry" name="صلاحية الدفعات"
+              parent="menu_pharmacy_root" action="action_lot_expiry" sequence="30"/>
+
+    <menuitem id="menu_pharmacy_loyalty" name="برنامج النقاط"
+              parent="menu_pharmacy_root" action="action_loyalty_config"
+              groups="group_pharmacy_manager" sequence="35"/>
+
+    <menuitem id="menu_pharmacy_promotion" name="العروض الترويجية"
+              parent="menu_pharmacy_root" action="action_promotion"
+              groups="group_pharmacy_manager" sequence="36"/>
+
+    <menuitem id="menu_pharmacy_dtts" name="رصد / DTTS"
+              parent="menu_pharmacy_root" sequence="40"
+              groups="group_pharmacy_manager"/>
+    <menuitem id="menu_pharmacy_dtts_config" name="الإعدادات"
+              parent="menu_pharmacy_dtts" action="action_dtts_config" sequence="10"/>
+    <menuitem id="menu_pharmacy_dtts_tx" name="العمليات"
+              parent="menu_pharmacy_dtts" action="action_dtts_transaction" sequence="20"/>
+</odoo>

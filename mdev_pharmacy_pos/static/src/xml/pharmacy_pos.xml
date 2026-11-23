@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="PharmacyPrescriptionPopup">
+        <div class="modal-dialog">
+            <div class="popup popup-pharmacy-prescription">
+                <p class="title"><t t-esc="(options || {}).title || 'وصفة طبية'"/></p>
+                <p class="body">
+                    الدواء: <b class="pharmacy-product"></b>
+                </p>
+                <div class="pharmacy-rx-form">
+                    <table style="width:100%;">
+                        <tr>
+                            <td>اسم المريض *</td>
+                            <td><input class="rx-patient-name" type="text" placeholder="إلزامي"/></td>
+                        </tr>
+                        <tr>
+                            <td>رقم الهوية</td>
+                            <td><input class="rx-patient-id" type="text"/></td>
+                        </tr>
+                        <tr>
+                            <td>جوال المريض</td>
+                            <td><input class="rx-patient-phone" type="text"/></td>
+                        </tr>
+                        <tr>
+                            <td>اسم الطبيب</td>
+                            <td><input class="rx-doctor" type="text"/></td>
+                        </tr>
+                        <tr>
+                            <td>ترخيص الطبيب</td>
+                            <td><input class="rx-doctor-license" type="text"/></td>
+                        </tr>
+                        <tr>
+                            <td>نوع الوصفة</td>
+                            <td>
+                                <select class="rx-type">
+                                    <option value="normal">عادية</option>
+                                    <option value="controlled">مخدّرات / مؤثرات عقلية</option>
+                                    <option value="chronic">أمراض مزمنة</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="footer">
+                    <div class="button confirm">تأكيد</div>
+                    <div class="button cancel">إلغاء</div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- أزرار شاشة البيع -->
+    <t t-name="PharmacyRedeemButton">
+        <div class="control-button">
+            <i class="fa fa-gift"/> استبدال نقاط
+        </div>
+    </t>
+    <t t-name="PharmacyReturnButton">
+        <div class="control-button">
+            <i class="fa fa-undo"/> مرتجع
+        </div>
+    </t>
+    <t t-name="PharmacyReprintButton">
+        <div class="control-button">
+            <i class="fa fa-print"/> فواتير سابقة
+        </div>
+    </t>
+    <t t-name="PharmacyZReportButton">
+        <div class="control-button">
+            <i class="fa fa-file-text-o"/> تقرير Z
+        </div>
+    </t>
+
+    <!-- نافذة قائمة الفواتير -->
+    <t t-name="PharmacyOrdersPopup">
+        <div class="modal-dialog">
+            <div class="popup popup-pharmacy-orders" style="width:620px;">
+                <p class="title"><t t-esc="(options || {}).title || 'الفواتير السابقة'"/></p>
+                <div style="padding:8px 16px;">
+                    <input class="order-search" type="text" placeholder="بحث برقم الفاتورة"
+                           style="width:70%;padding:5px;"/>
+                    <button class="search-btn button" style="width:25%;">بحث</button>
+                    <div style="max-height:320px;overflow:auto;margin-top:8px;">
+                        <table style="width:100%;" class="pharmacy-orders-table">
+                            <thead>
+                                <tr><th>الفاتورة</th><th>العميل</th><th>الإجمالي</th><th>التاريخ</th></tr>
+                            </thead>
+                            <tbody class="orders-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="button cancel">إغلاق</div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- نافذة طباعة عامة -->
+    <t t-name="PharmacyPrintPopup">
+        <div class="modal-dialog">
+            <div class="popup popup-pharmacy-print" style="width:440px;">
+                <p class="title"><t t-esc="(options || {}).title || 'طباعة'"/></p>
+                <div class="print-content" style="padding:12px 20px;direction:rtl;text-align:right;max-height:360px;overflow:auto;"></div>
+                <div class="footer">
+                    <div class="button print-btn">طباعة</div>
+                    <div class="button cancel">إغلاق</div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

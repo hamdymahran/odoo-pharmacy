@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pos_config_form_pharmacy" model="ir.ui.view">
+        <field name="name">pos.config.form.pharmacy</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="إعدادات الصيدلية" col="2">
+                    <field name="pharmacy_mode"/>
+                    <field name="block_expired"/>
+                    <field name="warn_near_expiry"/>
+                    <field name="expiry_warning_days"/>
+                    <field name="enforce_prescription"/>
+                    <field name="log_controlled"/>
+                    <field name="dtts_enabled"/>
+                    <field name="enable_loyalty"/>
+                    <field name="enable_promotions"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
